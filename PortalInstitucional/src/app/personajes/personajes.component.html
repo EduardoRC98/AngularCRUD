@@ -1,0 +1,33 @@
+<mat-tab-group mat-align-tabs="center" [backgroundColor]="'primary'" [color]="'accent'">
+  <mat-tab label="Characters">
+
+      <div fxLayoutAlign="center center"  fxLayout="column">
+        <h1>Meet our characters, search by any house you'd like!</h1>
+        <mat-form-field appearance="outline">
+          <mat-select placeholder="Gryffindor" name="houses" (selectionChange)="seleccionarPersonajes($event)">
+            <mat-option value="gryffindor" selected>Gryffindor</mat-option>
+            <mat-option value="hufflepuff">Hufflepuff</mat-option>
+            <mat-option value="ravenclaw">Ravenclaw</mat-option>
+            <mat-option value="slytherin">Slytherin</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <app-tabla-personajes [persona]="personajes"></app-tabla-personajes>
+
+  </mat-tab>
+
+  <mat-tab label="Students">
+    <div  fxLayoutAlign="center center"  fxLayout="column" >
+    <h1>Our students!</h1>
+    <button mat-raised-button [routerLink]="['/form']">Apply now to join Hogwarts!</button>
+      </div>
+      <app-tabla-personajes [persona]="estudiantes"></app-tabla-personajes>
+  </mat-tab>
+
+  <mat-tab label="Professors">
+    <div  fxLayoutAlign="center center"  fxLayout="column" >
+      <h1>Our Professors!</h1>
+    </div>
+      <app-tabla-personajes [persona]="profesores"></app-tabla-personajes>
+  </mat-tab>
+</mat-tab-group>

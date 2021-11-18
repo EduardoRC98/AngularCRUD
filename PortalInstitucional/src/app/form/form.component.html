@@ -1,0 +1,68 @@
+<div class="container">
+  <h2>Envía tu solicitud</h2>
+  <form novalidate (ngSubmit)="onSubmit()" [formGroup]="solicitudForm">
+    <div fxLayoutAlign="center center" fxLayout="column">
+      <div fxLayoutAlign="center center" fxLayout="row">
+      <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput #input minlength="1" placeholder="Ej. Marcos" formControlName="name">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Last Name</mat-label>
+          <input matInput #input minlength="1" placeholder="Ej. Rodríguez" formControlName="lastName">
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center center" fxLayout="row">
+      <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput #input minlength="1" placeholder="Ej. marcosr@gmail.com" formControlName="email">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Casa Hogwarts favorita</mat-label>
+          <mat-select formControlName="house">
+              <mat-option *ngFor="let option of houses" value={{option}}>{{option}}</mat-option>
+          </mat-select>
+      </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center center" fxLayout="row">
+      <button class="buttons-margin" mat-raised-button color="warn"  [routerLink]="['']">Go back</button>
+      <button class="buttons-margin" type="submit" mat-raised-button color="primary" [disabled]="solicitudForm.invalid">Enviar</button>
+    </div>
+    </div>
+  </form>
+
+  <div class="contenedor-tabla">
+      <ng-container *ngIf="solicitudes; else noItems">
+          <table mat-table [dataSource]="dataSource">
+              <!-- Columna de nombre -->
+              <ng-container matColumnDef="name">
+                  <th mat-header-cell *matHeaderCellDef>Name</th>
+                  <td mat-cell *matCellDef="let solicitud">{{solicitud.name}}</td>
+              </ng-container>
+              <!-- Columna de apellido -->
+              <ng-container matColumnDef="lastName">
+                  <th mat-header-cell *matHeaderCellDef>Last Name</th>
+                  <td mat-cell *matCellDef="let solicitud">{{solicitud.lastName}}</td>
+              </ng-container>
+
+              <!-- Columna de correo -->
+              <ng-container matColumnDef="email">
+                  <th mat-header-cell *matHeaderCellDef>Email</th>
+                  <td mat-cell *matCellDef="let solicitud">{{solicitud.email}}</td>
+              </ng-container>
+
+              <!-- Columna de casa -->
+              <ng-container matColumnDef="house">
+                  <th mat-header-cell *matHeaderCellDef>House</th>
+                  <td mat-cell *matCellDef="let solicitud">{{solicitud.house}}</td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+      </ng-container>
+      <ng-template #noItems></ng-template>
+  </div>
+</div>
